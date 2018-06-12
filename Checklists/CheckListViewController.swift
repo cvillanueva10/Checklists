@@ -17,52 +17,49 @@ class CheckListViewController: UITableViewController, AddChecklistItemController
     }
 
     func addChecklistItemController(_ controller: AddChecklistItemController, didFinishAdding item: ChecklistItem) {
+        let newRowIndex = items.count
+        items.append(item)
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexPaths = [indexPath]
+        tableView.insertRows(at: indexPaths, with: .automatic)
         navigationController?.popViewController(animated: true)
     }
 
-
     private let cellId = "cellId"
+    private let checklistCellId = "checklistCellId"
 
     var items: [ChecklistItem] = [
-        ChecklistItem(text: "First label", checked: true),
-        ChecklistItem(text: "Second label", checked: true),
-        ChecklistItem(text: "Third label", checked: false),
-        ChecklistItem(text: "Fourth label", checked: true),
-        ChecklistItem(text: "Fifth label", checked: false),
+        ChecklistItem(text: "Wash dishes", checked: false),
+        ChecklistItem(text: "Vacuum", checked: true),
+        ChecklistItem(text: "Iron clothes", checked: false)
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(ChecklistTableViewCell.self, forCellReuseIdentifier: checklistCellId)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Checklists"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddChecklistItem))
     }
 
     @objc func handleAddChecklistItem() {
-//        let newRowIndex = items.count
-//        let text = "Im a new label named: \(newRowIndex)"
-//        let item = ChecklistItem(text: text, checked: false)
-//        items.append(item)
-//        let indexPath = IndexPath(row: newRowIndex, section: 0)
-//        let indexPaths = [indexPath]
-//        tableView.insertRows(at: indexPaths, with: .automatic)
         let addChecklistItemController = AddChecklistItemController()
         addChecklistItemController.delegate = self
         navigationController?.pushViewController(addChecklistItemController, animated: true)
     }
 
     func configureCheckmark(for cell: UITableViewCell, with item: ChecklistItem) {
-        if item.checked {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
+//        if item.checked {
+//            cell.accessoryType = .checkmark
+//        } else {
+//            cell.accessoryType = .none
+//        }
     }
 
-    func configureText(for cell: UITableViewCell, with item: ChecklistItem) {
-        cell.textLabel?.text = item.text
+    func configureText(for cell: ChecklistTableViewCell, with item: ChecklistItem) {
+        //cell.textLabel?.text = item.text
+        cell.nameTextLabel.text = item.text
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -84,7 +81,9 @@ class CheckListViewController: UITableViewController, AddChecklistItemController
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        //let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: checklistCellId, for: indexPath) as! ChecklistTableViewCell
+         cell.accessoryType = .detailDisclosureButton
         let item = items[indexPath.row]
         configureText(for: cell, with: item)
         configureCheckmark(for: cell, with: item)

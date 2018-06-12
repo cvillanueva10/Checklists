@@ -90,7 +90,6 @@ class AddChecklistItemController: UITableViewController, UITextFieldDelegate {
         guard let nameText = nameTextField.text else { return }
         let newItem = ChecklistItem(text: nameText, checked: false)
         delegate?.addChecklistItemController(self, didFinishAdding: newItem)
-        print("\(nameTextField.text ?? "")")
     }
 
     @objc func handleDismiss() {
