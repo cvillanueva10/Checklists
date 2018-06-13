@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let navigationController = UINavigationController(rootViewController:
-            CheckListViewController())
+            AllListsViewController())
         window?.rootViewController = navigationController
         return true
     }

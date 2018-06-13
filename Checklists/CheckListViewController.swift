@@ -38,17 +38,15 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
         saveChecklistItems()
     }
 
-    // Properties
+    // MARK: - Properties
 
     private let cellId = "cellId"
     private let checklistCellId = "checklistCellId"
-
-    // Dummy items
-
     var items = [ChecklistItem]()
+    var checklist: Checklist?
 
 
-    // MARK : - life cycle methods
+    // MARK: - life cycle methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +56,14 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
     }
 
     func configureNavigationItems() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Checklists"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonS≥stemItem: .add, target: self, action: #selector(handleAddChecklistItem))
+        if let checklist = checklist {
+            navigationItem.title = checklist.name
+        }
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddChecklistItem))
     }
 
-    // MARK : - Data handling / saving methods
+    // MARK: - Data handling / saving methods
 
     func saveChecklistItems() {
         let encoder = PropertyListEncoder()
@@ -96,7 +96,6 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
         return documentsDirectory().appendingPathComponent("Checklists.plist")
     }
 
-    //
     @objc func handleAddChecklistItem() {
         let addEditItemController = AddEditItemController()
         addEditItemController.delegate = self
@@ -110,7 +109,7 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
         navigationController?.pushViewController(addEditItemController, animated: true)
     }
 
-    // MARK : - Configure views
+    // MARK: - Configure views
 
     func configureCheckmark(for cell: ChecklistTableViewCell, with item: ChecklistItem) {
         cell.checkmarkLabel.text = item.checked ? "√" : ""
@@ -120,7 +119,7 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
         cell.nameTextLabel.text = item.text
     }
 
-    // MARK : - Table view functions
+    // MARK: - Table view functions
 
     // Delete row
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
