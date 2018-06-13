@@ -17,6 +17,7 @@
 		5652ABCA20D0C28E005ACD8C /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5652ABC920D0C28E005ACD8C /* AllListsViewController.swift */; };
 		5652ABCC20D0CA22005ACD8C /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5652ABCB20D0CA22005ACD8C /* Checklist.swift */; };
 		5652ABCE20D0CEB2005ACD8C /* AddEditListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5652ABCD20D0CEB2005ACD8C /* AddEditListController.swift */; };
+		5652ABD020D1AF6E005ACD8C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5652ABCF20D1AF6E005ACD8C /* DataModel.swift */; };
 		AC42A13720D04C600080FCFD /* ChecklistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC42A13620D04C600080FCFD /* ChecklistTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		5652ABC920D0C28E005ACD8C /* AllListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListsViewController.swift; sourceTree = "<group>"; };
 		5652ABCB20D0CA22005ACD8C /* Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
 		5652ABCD20D0CEB2005ACD8C /* AddEditListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditListController.swift; sourceTree = "<group>"; };
+		5652ABCF20D1AF6E005ACD8C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		AC42A13620D04C600080FCFD /* ChecklistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,19 +69,44 @@
 			isa = PBXGroup;
 			children = (
 				5652ABB320CED91F005ACD8C /* AppDelegate.swift */,
-				5652ABC720CF145A005ACD8C /* AddEditItemController.swift */,
-				5652ABCD20D0CEB2005ACD8C /* AddEditListController.swift */,
-				5652ABC920D0C28E005ACD8C /* AllListsViewController.swift */,
-				5652ABCB20D0CA22005ACD8C /* Checklist.swift */,
-				5652ABC520CEF0C0005ACD8C /* ChecklistItem.swift */,
-				5652ABB520CED91F005ACD8C /* CheckListViewController.swift */,
-				AC42A13620D04C600080FCFD /* ChecklistTableViewCell.swift */,
+				5652ABD220D1C0D9005ACD8C /* Data Models */,
+				5652ABD120D1C0C7005ACD8C /* View Controllers */,
+				5652ABD320D1C105005ACD8C /* View */,
 				5652ABB720CED91F005ACD8C /* Main.storyboard */,
 				5652ABBA20CED921005ACD8C /* Assets.xcassets */,
 				5652ABBC20CED921005ACD8C /* LaunchScreen.storyboard */,
 				5652ABBF20CED921005ACD8C /* Info.plist */,
 			);
 			path = Checklists;
+			sourceTree = "<group>";
+		};
+		5652ABD120D1C0C7005ACD8C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5652ABC720CF145A005ACD8C /* AddEditItemController.swift */,
+				5652ABCD20D0CEB2005ACD8C /* AddEditListController.swift */,
+				5652ABC920D0C28E005ACD8C /* AllListsViewController.swift */,
+				5652ABB520CED91F005ACD8C /* CheckListViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		5652ABD220D1C0D9005ACD8C /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				5652ABCB20D0CA22005ACD8C /* Checklist.swift */,
+				5652ABC520CEF0C0005ACD8C /* ChecklistItem.swift */,
+				5652ABCF20D1AF6E005ACD8C /* DataModel.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		5652ABD320D1C105005ACD8C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC42A13620D04C600080FCFD /* ChecklistTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +188,7 @@
 				5652ABCE20D0CEB2005ACD8C /* AddEditListController.swift in Sources */,
 				5652ABB420CED91F005ACD8C /* AppDelegate.swift in Sources */,
 				5652ABCC20D0CA22005ACD8C /* Checklist.swift in Sources */,
+				5652ABD020D1AF6E005ACD8C /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

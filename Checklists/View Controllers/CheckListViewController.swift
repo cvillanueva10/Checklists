@@ -14,28 +14,26 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
 
     func addEditItemControllerDidCancel(_ controller: AddEditItemController) {
         navigationController?.popViewController(animated: true)
-        saveChecklistItems()
     }
 
     func addEditItemController(_ controller: AddEditItemController, didFinishEditing item: ChecklistItem) {
 
-        if let index = items.index(of: item) {
+        if let index = checklist?.items.index(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             guard let cell = tableView.cellForRow(at: indexPath) as? ChecklistTableViewCell else { return }
             configureText(for: cell, with: item)
         }
         navigationController?.popViewController(animated: true)
-        saveChecklistItems()
     }
 
     func addEditItemController(_ controller: AddEditItemController, didFinishAdding item: ChecklistItem) {
-        let newRowIndex = items.count
-        items.append(item)
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths, with: .automatic)
-        navigationController?.popViewController(animated: true)
-        saveChecklistItems()
+        if let newRowIndex = checklist?.items.count {
+            checklist?.items.append(item)
+            let indexPath = IndexPath(row: newRowIndex, section: 0)
+            let indexPaths = [indexPath]
+            tableView.insertRows(at: indexPaths, with: .automatic)
+            navigationController?.popViewController(animated: true)
+        }
     }
 
     // MARK: - Properties
@@ -51,7 +49,6 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationItems()
-        loadChecklistItems()
         tableView.register(ChecklistTableViewCell.self, forCellReuseIdentifier: checklistCellId)
     }
 
@@ -63,38 +60,7 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddChecklistItem))
     }
 
-    // MARK: - Data handling / saving methods
-
-    func saveChecklistItems() {
-        let encoder = PropertyListEncoder()
-        do {
-            let data = try encoder.encode(items)
-            try data.write(to: dataFilePath(), options: .atomic)
-        } catch {
-            print("Error encoding item array")
-        }
-    }
-
-    func loadChecklistItems() {
-        let path = dataFilePath()
-        if let data = try? Data(contentsOf: path) {
-            let decoder = PropertyListDecoder()
-            do {
-                items = try decoder.decode([ChecklistItem].self, from: data)
-            } catch {
-                print("Error decoding item array")
-            }
-        }
-    }
-
-    func documentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
-    }
-
-    func dataFilePath() -> URL {
-        return documentsDirectory().appendingPathComponent("Checklists.plist")
-    }
+    // MARK: - handlers
 
     @objc func handleAddChecklistItem() {
         let addEditItemController = AddEditItemController()
@@ -123,39 +89,39 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
 
     // Delete row
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        items.remove(at: indexPath.row)
+        checklist?.items.remove(at: indexPath.row)
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
     }
 
     // Edit row
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let item = items[indexPath.row]
+        guard let item = checklist?.items[indexPath.row] else { return }
         handleEditChecklistItem(item: item)
     }
 
     // Select row
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? ChecklistTableViewCell else { return }
-        let item = items[indexPath.row]
+        guard let item = checklist?.items[indexPath.row] else { return }
         item.toggleChecked()
         configureCheckmark(for: cell, with: item)
         tableView.deselectRow(at: indexPath, animated: true)
-        saveChecklistItems()
     }
 
     // Number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return checklist?.items.count ?? 0
     }
 
     // Cell for rows
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: checklistCellId, for: indexPath) as! ChecklistTableViewCell
         cell.accessoryType = .detailDisclosureButton
-        let item = items[indexPath.row]
-        configureText(for: cell, with: item)
-        configureCheckmark(for: cell, with: item)
+        if let item = checklist?.items[indexPath.row] {
+            configureText(for: cell, with: item)
+            configureCheckmark(for: cell, with: item)
+        }
         return cell
     }
 }

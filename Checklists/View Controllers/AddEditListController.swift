@@ -42,6 +42,15 @@ class AddEditListController: UITableViewController, UITextFieldDelegate {
         configureNavigiationItems()
     }
 
+    // MARK: - Data validation
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let oldText = nameTextField.text else { return false }
+        guard let stringRange = Range(range, in: oldText) else { return false }
+        let newText = oldText.replacingCharacters(in: stringRange, with: string)
+        doneButton?.isEnabled = !newText.isEmpty
+        return true
+    }
+
     // TODO: - Refactor this into helpful extension
     func configureTextField(for cell: UITableViewCell, at indexPath: IndexPath) {
         cell.addSubview(nameTextField)
@@ -74,9 +83,15 @@ class AddEditListController: UITableViewController, UITextFieldDelegate {
         return cell
     }
 
-    // TODO: - Add saving list functionality
     @objc func handleSaveNewList(){
-        delegate?.addEditListControllerDidCancel(self)
+        guard let nameText = nameTextField.text else { return }
+        if let checklistToEdit = checklistToEdit {
+            checklistToEdit.name = nameText
+            delegate?.addEditListController(self, didFinishEditing: checklistToEdit)
+        } else {
+            let list = Checklist(name: nameText)
+            delegate?.addEditListController(self, didFinishAdding: list)
+        }
     }
 
     @objc func handleDismiss() {

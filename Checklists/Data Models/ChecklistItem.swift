@@ -10,14 +10,13 @@ import Foundation
 
 
 class ChecklistItem: NSObject, Codable {
+
     static func == (lhs: ChecklistItem, rhs: ChecklistItem) -> Bool {
         return lhs.text == rhs.text
     }
 
-
     var text: String
     var checked: Bool
-
 
     init(text: String, checked: Bool){
         self.text = text
