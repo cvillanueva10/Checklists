@@ -12,7 +12,7 @@ class ChecklistTableViewCell: UITableViewCell {
     
     let checkmarkLabel: UILabel = {
         let label = UILabel()
-        label.text = "√"
+        label.text = ""
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

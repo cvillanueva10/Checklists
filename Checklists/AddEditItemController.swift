@@ -8,12 +8,13 @@
 
 import UIKit
 
-protocol AddChecklistItemControllerDelegate: class {
-    func addChecklistItemControllerDidCancel(_ controller: AddChecklistItemController)
-    func addChecklistItemController(_ controller: AddChecklistItemController, didFinishAdding item: ChecklistItem)
+protocol AddEditItemControllerDelegate: class {
+    func addEditItemControllerDidCancel(_ controller: AddEditItemController)
+    func addEditItemController(_ controller: AddEditItemController, didFinishAdding item: ChecklistItem)
+    func addEditItemController(_ controller: AddEditItemController, didFinishEditing item: ChecklistItem)
 }
 
-class AddChecklistItemController: UITableViewController, UITextFieldDelegate {
+class AddEditItemController: UITableViewController, UITextFieldDelegate {
 
     private let staticNameField = "staticNameField"
 
@@ -31,19 +32,29 @@ class AddChecklistItemController: UITableViewController, UITextFieldDelegate {
     }()
 
     var doneButton: UIBarButtonItem?
-
-    weak var delegate: AddChecklistItemControllerDelegate?
+    weak var delegate: AddEditItemControllerDelegate?
+    var itemToEdit: ChecklistItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.largeTitleDisplayMode = .never
-        navigationItem.title = "Adding"
-        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleSaveNewItem))
-        doneButton?.isEnabled = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleDismiss))
-        navigationItem.rightBarButtonItem = doneButton
+        configureNavigationItems()
         tableView = UITableView.init(frame: .zero, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: staticNameField)
+    }
+
+    func configureNavigationItems() {
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleDismiss))
+        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleSaveNewItem))
+        navigationItem.rightBarButtonItem = doneButton
+        if let itemToEdit = itemToEdit {
+            navigationItem.title = "Edit Item"
+            nameTextField.text = itemToEdit.text
+            doneButton?.isEnabled = true
+        } else {
+            navigationItem.title = "Add Item"
+            doneButton?.isEnabled = false
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -86,15 +97,19 @@ class AddChecklistItemController: UITableViewController, UITextFieldDelegate {
     }
 
     @objc func handleSaveNewItem() {
-       // navigationController?.popViewController(animated: true)
         guard let nameText = nameTextField.text else { return }
-        let newItem = ChecklistItem(text: nameText, checked: false)
-        delegate?.addChecklistItemController(self, didFinishAdding: newItem)
+        if let itemToEdit = itemToEdit {
+            itemToEdit.text = nameText
+            delegate?.addEditItemController(self, didFinishEditing: itemToEdit)
+        } else {
+
+            let newItem = ChecklistItem(text: nameText, checked: false)
+            delegate?.addEditItemController(self, didFinishAdding: newItem)
+        }
     }
 
     @objc func handleDismiss() {
-        //navigationController?.popViewController(animated: true)
-        delegate?.addChecklistItemControllerDidCancel(self)
+        delegate?.addEditItemControllerDidCancel(self)
     }
 
 }
