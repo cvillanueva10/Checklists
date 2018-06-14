@@ -8,6 +8,19 @@
 
 import UIKit
 
+// MARK: - custom table view cell for subtitles
+
+class SubtitleTableViewCell: UITableViewCell {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - main view controller
+
 class AllListsViewController: UITableViewController, AddEditListControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: - protocol stubs
@@ -51,7 +64,9 @@ class AllListsViewController: UITableViewController, AddEditListControllerDelega
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Checklists"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddChecklist))
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: checklistCell)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: checklistCell)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -99,9 +114,10 @@ class AllListsViewController: UITableViewController, AddEditListControllerDelega
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: checklistCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: checklistCell, for: indexPath) as! SubtitleTableViewCell
         let list = dataModel.lists[indexPath.row]
         cell.textLabel?.text = list.name
+        cell.detailTextLabel!.text = "\(list.countUncheckedItems()) Items Remaining"
         cell.accessoryType = .detailDisclosureButton
         return cell
     }
