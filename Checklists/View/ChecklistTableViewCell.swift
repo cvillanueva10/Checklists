@@ -10,9 +10,11 @@ import UIKit
 
 class ChecklistTableViewCell: UITableViewCell {
     
-    let checkmarkLabel: UILabel = {
+    lazy var checkmarkLabel: UILabel = {
         let label = UILabel()
         label.text = ""
+        label.textColor = self.tintColor
+        label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -21,6 +23,7 @@ class ChecklistTableViewCell: UITableViewCell {
     let nameTextLabel: UILabel = {
         let label = UILabel()
         label.text = ""
+        label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.systemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

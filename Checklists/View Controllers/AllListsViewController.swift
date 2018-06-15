@@ -62,6 +62,8 @@ class AllListsViewController: UITableViewController, AddEditListControllerDelega
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddChecklist))
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorInset = .zero
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: checklistCell)
     }
 
@@ -127,7 +129,6 @@ class AllListsViewController: UITableViewController, AddEditListControllerDelega
         } else {
             cell.detailTextLabel!.text = "\(list.countUncheckedItems()) Items Remaining"
         }
-        
         cell.accessoryType = .detailDisclosureButton
         return cell
     }

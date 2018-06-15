@@ -39,6 +39,8 @@ class AddEditItemController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         configureNavigationItems()
         tableView = UITableView.init(frame: .zero, style: .grouped)
+        tableView.separatorInset = .zero
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: staticNameField)
     }
 

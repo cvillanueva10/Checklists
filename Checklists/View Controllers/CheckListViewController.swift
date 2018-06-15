@@ -49,6 +49,8 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationItems()
+        tableView.separatorInset = .zero
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.register(ChecklistTableViewCell.self, forCellReuseIdentifier: checklistCellId)
     }
 
