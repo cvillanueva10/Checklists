@@ -46,8 +46,14 @@ class DataModel {
             userDefaults.synchronize()
         }
     }
+    
+    // MARK: - data manipulating methods
+    func sortChecklists() {
+        lists.sort { (firstList, secondList) -> Bool in
+            return firstList.name.localizedStandardCompare(secondList.name) == .orderedAscending}
+    }
 
-    // MARK: - data handling / saving methods
+    // MARK: - data loading / saving methods
 
     func saveChecklists() {
         let encoder = PropertyListEncoder()
@@ -70,6 +76,7 @@ class DataModel {
                 print("Error decoding item array")
             }
         }
+        sortChecklists()
     }
 
     func documentsDirectory() -> URL {

@@ -19,6 +19,7 @@
 		5652ABCE20D0CEB2005ACD8C /* AddEditListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5652ABCD20D0CEB2005ACD8C /* AddEditListController.swift */; };
 		5652ABD020D1AF6E005ACD8C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5652ABCF20D1AF6E005ACD8C /* DataModel.swift */; };
 		AC42A13720D04C600080FCFD /* ChecklistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC42A13620D04C600080FCFD /* ChecklistTableViewCell.swift */; };
+		AC42A13920D324F50080FCFD /* IconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC42A13820D324F50080FCFD /* IconPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		5652ABCD20D0CEB2005ACD8C /* AddEditListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditListController.swift; sourceTree = "<group>"; };
 		5652ABCF20D1AF6E005ACD8C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		AC42A13620D04C600080FCFD /* ChecklistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistTableViewCell.swift; sourceTree = "<group>"; };
+		AC42A13820D324F50080FCFD /* IconPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				5652ABCD20D0CEB2005ACD8C /* AddEditListController.swift */,
 				5652ABC920D0C28E005ACD8C /* AllListsViewController.swift */,
 				5652ABB520CED91F005ACD8C /* CheckListViewController.swift */,
+				AC42A13820D324F50080FCFD /* IconPickerViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				5652ABB620CED91F005ACD8C /* CheckListViewController.swift in Sources */,
 				5652ABC620CEF0C0005ACD8C /* ChecklistItem.swift in Sources */,
 				5652ABCA20D0C28E005ACD8C /* AllListsViewController.swift in Sources */,
+				AC42A13920D324F50080FCFD /* IconPickerViewController.swift in Sources */,
 				5652ABC820CF145A005ACD8C /* AddEditItemController.swift in Sources */,
 				AC42A13720D04C600080FCFD /* ChecklistTableViewCell.swift in Sources */,
 				5652ABCE20D0CEB2005ACD8C /* AddEditListController.swift in Sources */,

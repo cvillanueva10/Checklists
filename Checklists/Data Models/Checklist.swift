@@ -11,8 +11,9 @@ import Foundation
 class Checklist: NSObject, Codable {
 
     var name: String
+    var iconName: String = "No Icon"
     var items: [ChecklistItem] = []
-
+    
     // MARK: - lifecycle
 
     init(name: String){

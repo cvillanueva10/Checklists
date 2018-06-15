@@ -30,19 +30,15 @@ class AllListsViewController: UITableViewController, AddEditListControllerDelega
     }
 
     func addEditListController(_ controller: AddEditListController, didFinishAdding list: Checklist) {
-        let newIndex = dataModel.lists.count
         dataModel.lists.append(list)
-        let indexPath = IndexPath(row: newIndex, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths, with: .automatic)
+        dataModel.sortChecklists()
+        tableView.reloadData() // We can do this because list shouldnt be too long
         navigationController?.popViewController(animated: true)
     }
 
     func addEditListController(_ controller: AddEditListController, didFinishEditing list: Checklist) {
-        guard let index = dataModel.lists.index(of: list) else { return }
-        let indexPath = IndexPath(row: index, section: 0)
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        cell.textLabel?.text = list.name
+        dataModel.sortChecklists()
+        tableView.reloadData() // We can do this because list shouldnt be too long
         navigationController?.popViewController(animated: true)
     }
 
@@ -78,6 +74,11 @@ class AllListsViewController: UITableViewController, AddEditListControllerDelega
             checklistViewController.checklist = dataModel.lists[index]
             navigationController?.pushViewController(checklistViewController, animated: true)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     // MARK: - handlers
@@ -116,8 +117,17 @@ class AllListsViewController: UITableViewController, AddEditListControllerDelega
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: checklistCell, for: indexPath) as! SubtitleTableViewCell
         let list = dataModel.lists[indexPath.row]
+        cell.imageView?.image = UIImage(named: list.iconName)
         cell.textLabel?.text = list.name
-        cell.detailTextLabel!.text = "\(list.countUncheckedItems()) Items Remaining"
+        let remaningItems = list.countUncheckedItems()
+        if list.items.count == 0 {
+            cell.detailTextLabel?.text = "{No Items)"
+        } else if remaningItems == 0 {
+            cell.detailTextLabel?.text = "All Done!"
+        } else {
+            cell.detailTextLabel!.text = "\(list.countUncheckedItems()) Items Remaining"
+        }
+        
         cell.accessoryType = .detailDisclosureButton
         return cell
     }
