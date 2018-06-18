@@ -53,6 +53,11 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
         tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.register(ChecklistTableViewCell.self, forCellReuseIdentifier: checklistCellId)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
     func configureNavigationItems() {
         if let checklist = checklist {

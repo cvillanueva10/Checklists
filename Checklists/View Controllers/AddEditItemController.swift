@@ -98,18 +98,7 @@ class AddEditItemController: UITableViewController, UITextFieldDelegate {
     }
     
     // MARK: - update UI methods
-    
-    func changeDetailTextTint(){
-        let indexPathDateRow = IndexPath(row: 1, section: 1)
-        if let dateCell = tableView.cellForRow(at: indexPathDateRow) {
-            if datePickerIsVisible {
-                dateCell.detailTextLabel?.textColor = dateCell.detailTextLabel?.tintColor
-            }
-        }
-        
-    }
-    
-    // FIXME: - invstigate UI bug with table view cells
+
     // FIXME: - fix detail text color
     
     func updateDueDateLabel() {
@@ -134,14 +123,13 @@ class AddEditItemController: UITableViewController, UITextFieldDelegate {
     
     func showDatePicker() {
         datePickerIsVisible = true
-        let indexPathDateRow = IndexPath(row: 1, section: 1)
+        //let indexPathDateRow = IndexPath(row: 1, section: 1)
         let indexPathDatePicker = IndexPath(row: 2, section: 1)
-        if let dateCell = tableView.cellForRow(at: indexPathDateRow) {
-            dateCell.detailTextLabel?.textColor = dateCell.detailTextLabel?.tintColor
-        }
-        tableView.beginUpdates()
-        tableView.insertRows(at: [indexPathDatePicker], with: .fade)
-        tableView.endUpdates()
+        
+        // FIXME: - invstigate UI bug with table view cells
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: [indexPathDatePicker], with: .fade)
+        self.tableView.endUpdates()
         datePicker.setDate(dueDate, animated: false)
     }
     
