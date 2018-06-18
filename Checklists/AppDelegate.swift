@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     let dataModel = DataModel()
     var window: UIWindow?
@@ -18,18 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveData() {
         dataModel.saveChecklists()
     }
+    
+    // Function called when notification received while app in foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("Received local notification: \(notification)")
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound]) { (isGranted, error) in
-            if isGranted {
-                print("We got permission!")
-            } else {
-                print("No permission bruh")
-            }
-        }
-
+        center.delegate = self
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.tintColor = UIColor.init(red: 0, green: 107/255, blue: 180/255, alpha: 1)

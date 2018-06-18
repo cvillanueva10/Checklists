@@ -20,6 +20,7 @@
 		5652ABD020D1AF6E005ACD8C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5652ABCF20D1AF6E005ACD8C /* DataModel.swift */; };
 		AC42A13720D04C600080FCFD /* ChecklistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC42A13620D04C600080FCFD /* ChecklistTableViewCell.swift */; };
 		AC42A13920D324F50080FCFD /* IconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC42A13820D324F50080FCFD /* IconPickerViewController.swift */; };
+		AC42A13B20D833CE0080FCFD /* DetailedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC42A13A20D833CE0080FCFD /* DetailedTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		5652ABCF20D1AF6E005ACD8C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		AC42A13620D04C600080FCFD /* ChecklistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistTableViewCell.swift; sourceTree = "<group>"; };
 		AC42A13820D324F50080FCFD /* IconPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerViewController.swift; sourceTree = "<group>"; };
+		AC42A13A20D833CE0080FCFD /* DetailedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				AC42A13620D04C600080FCFD /* ChecklistTableViewCell.swift */,
+				AC42A13A20D833CE0080FCFD /* DetailedTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				5652ABB420CED91F005ACD8C /* AppDelegate.swift in Sources */,
 				5652ABCC20D0CA22005ACD8C /* Checklist.swift in Sources */,
 				5652ABD020D1AF6E005ACD8C /* DataModel.swift in Sources */,
+				AC42A13B20D833CE0080FCFD /* DetailedTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

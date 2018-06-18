@@ -79,11 +79,11 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
 
     // MARK: - Configure views
 
-    func configureCheckmark(for cell: ChecklistTableViewCell, with item: ChecklistItem) {
+    private func configureCheckmark(for cell: ChecklistTableViewCell, with item: ChecklistItem) {
         cell.checkmarkLabel.text = item.checked ? "√" : ""
     }
 
-    func configureText(for cell: ChecklistTableViewCell, with item: ChecklistItem) {
+    private func configureText(for cell: ChecklistTableViewCell, with item: ChecklistItem) {
         cell.nameTextLabel.text = item.text
     }
 
