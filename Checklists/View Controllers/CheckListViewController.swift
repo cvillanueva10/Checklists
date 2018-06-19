@@ -94,6 +94,12 @@ class CheckListViewController: UITableViewController, AddEditItemControllerDeleg
 
     // MARK: - Table view functions
 
+    // Override this due to bug with CheckListTableViewCell
+    // constraints
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+
     // Delete row
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         checklist?.items.remove(at: indexPath.row)

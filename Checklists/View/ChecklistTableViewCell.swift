@@ -31,12 +31,22 @@ class ChecklistTableViewCell: UITableViewCell {
     
     private func setupView() {
         addSubview(checkmarkLabel)
-        checkmarkLabel.frame = CGRect(
-            origin:  CGPoint(x: 10, y: 0),
-            size: CGSize(width: 30, height: frame.height)
-        )
+//        checkmarkLabel.frame = CGRect(
+//            origin:  CGPoint(x: 10, y: 0),
+//            size: CGSize(width: 30, height: frame.height)
+//        )
+        checkmarkLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        checkmarkLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        checkmarkLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        checkmarkLabel.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+
+
         addSubview(nameTextLabel)
-        nameTextLabel.frame = CGRect(x: 40, y: 0, width: frame.width - 50, height: frame.height)
+        nameTextLabel.leftAnchor.constraint(equalTo: checkmarkLabel.rightAnchor).isActive = true
+        nameTextLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        nameTextLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        nameTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+//        nameTextLabel.frame = CGRect(x: 40, y: 0, width: frame.width - 50, height: frame.height)
     }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
